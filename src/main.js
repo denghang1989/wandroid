@@ -3,6 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import  { AlertPlugin } from 'vux'
+import { AjaxPlugin } from 'vux'
+
+Vue.use(AjaxPlugin);
+
+Vue.use(AlertPlugin);
 
 Vue.config.productionTip = false;
 
