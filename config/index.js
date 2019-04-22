@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'https://www.wanandroid.com',
+        target: 'https://www.wanandroid.com/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
