@@ -5,6 +5,7 @@ import Person from '@/page/Person';
 import Project from '@/page/Project';
 import Wechat from '@/page/Wechat';
 import System from '@/page/System';
+import WechatFragment from '@/page/WechatFragment';
 
 Vue.use(Router);
 
@@ -33,7 +34,13 @@ export default new Router({
     {
       path: '/wechat',
       name: 'Wechat',
-      component: Wechat
+      component: Wechat,
+      children: [
+        {
+          path: "",
+          component: WechatFragment
+        }
+      ]
     },
     {
       path: '/system',
