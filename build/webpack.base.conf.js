@@ -83,6 +83,9 @@ const originalConfig = {
 };
 
 const webpackConfig = originalConfig ;
+
 module.exports = vuxLoader.merge(webpackConfig, {
-  plugins: ['vux-ui']
+  plugins: ['vux-ui' ,
+    {name :"less-theme",path:"src/style/theme.less"}
+  ]
 });

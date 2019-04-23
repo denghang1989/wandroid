@@ -6,6 +6,8 @@ import router from './router'
 import  { AlertPlugin } from 'vux'
 import { AjaxPlugin } from 'vux'
 
+import 'font-awesome/css/font-awesome.css'
+
 Vue.use(AjaxPlugin);
 
 Vue.use(AlertPlugin);

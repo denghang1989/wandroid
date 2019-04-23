@@ -1,20 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Home from '@/page/Home';
 import Person from '@/page/Person';
 import Project from '@/page/Project';
 import Wechat from '@/page/Wechat';
 import System from '@/page/System';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      component: Home
     },
     {
       path: '/home',

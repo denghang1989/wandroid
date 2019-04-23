@@ -1,6 +1,25 @@
 <template>
   <div class="home">
-    <swiper :list="bannerList" @on-index-change="onIndexChange"></swiper>
+    <swiper :list="imageList" @on-index-change="onIndexChange"></swiper>
+    <ul class="list-ui">
+      <li class="list-item" v-for="(item,index) in articleList" :key="index">
+        <section class="item">
+          <header class="item-header">
+            <span>{{item.author}}</span>
+            <span>{{item.niceDate}}</span>
+          </header>
+          <main class="item-main">
+            {{item.title}}
+          </main>
+          <footer class="item-footer">
+            <span>{{item.superChapterName}}/{{item.chapterName}}</span>
+            <span>
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
+            </span>
+          </footer>
+        </section>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -12,39 +31,89 @@
     components: {Swiper},
     data() {
       return {
-        imageList: [{
-          url: 'javascript:',
-          img: 'https://static.vux.li/demo/1.jpg',
-          title: '送你一朵fua'
-        }, {
-          url: 'javascript:',
-          img: 'https://static.vux.li/demo/5.jpg',
-          title: '送你一次旅行',
-          fallbackImg: 'https://static.vux.li/demo/3.jpg'
-        }]
+        imageList: [],
+        number: "0",
+        articleData: {}
       }
     },
     methods: {
       onIndexChange(currentIndex) {
       
       },
+      
       getBannerList() {
         this.$http.get("/api/banner/json").then(({data}) => {
-          console.log(data);
+          if ((data.errorCode === 0) && (Array.isArray(data.data))) {
+            this.imageList = data.data.map(function (item, index, array) {
+              return {
+                url: 'javascript:',
+                img: item.imagePath,
+                title: item.desc
+              }
+            });
+          }
+        })
+      },
+      
+      getArticles(pageNum) {
+        this.$http.get(`/api/article/list/${pageNum}/json`).then(({data}) => {
+          if (data.errorCode === 0) {
+            this.articleData = data;
+          }
         })
       }
     },
     computed: {
-      bannerList() {
-        return this.data;
+      articleList() {
+        var data = this.articleData.data;
+        if (data) {
+          return data.datas;
+        } else {
+          return [];
+        }
       }
     },
     mounted() {
       this.getBannerList();
+      this.getArticles(this.number)
     }
   }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  .list-ui {
+    margin: 0;
+    list-style: none;
+  }
+  
+  .list-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .item-header, .item-footer {
+    display: flex;
+    flex-direction: row;
+    padding: 3px 0px;
+    justify-content: space-between;
+  }
+  
+  .item-header > span, .item-footer > span {
+    color: #333333;
+    font-size: 12px;
+  }
+  
+  .item-main {
+    font-size: 16px;
+    padding: 3px 0px;
+    margin: 0;
+  }
+  
+  .list-item:last-child {
+    border-bottom: none;
+  }
+  
+  span > i {
+    font-size: 18px;
+  }
 </style>
