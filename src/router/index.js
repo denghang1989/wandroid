@@ -6,6 +6,7 @@ import Project from '@/page/Project';
 import Wechat from '@/page/Wechat';
 import System from '@/page/System';
 import WechatFragment from '@/page/WechatFragment';
+import ProjectFragment from '@/page//ProjectFragment';
 
 Vue.use(Router);
 
@@ -45,6 +46,12 @@ export default new Router({
     {
       path: '/system',
       name: 'System',
-      component: System
+      component: System,
+      children: [
+        {
+          path: "",
+          component: ProjectFragment
+        }
+      ]
     }]
 })
