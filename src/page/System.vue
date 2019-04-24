@@ -1,7 +1,7 @@
 <template>
   <div class="system">
     <ul class="system-list">
-      <li class="system-item" v-for="(item,index) in systemList" :key="index">
+      <li class="system-item" v-for="(item,index) in systemList" :key="index" @click="handleClick(item,index)">
         <section class="system-item-left">
           <header>
             {{item.name}}
@@ -44,6 +44,10 @@
             this.systemObject = data;
           }
         })
+      },
+      
+      handleClick(item, index) {
+        this.$router.push({path: "/systemDetailsPage", query: {item: item}})
       }
     },
     mounted() {
