@@ -13,7 +13,7 @@
               <h4>{{item.title}}</h4>
             </header>
             <main>
-              {{item.desc}}
+              {{item.simpleDesc}}
             </main>
             <footer>
               <span>{{item.author}}</span>
@@ -32,8 +32,7 @@
 </template>
 
 <script>
-  import Flexbox from "vux/src/components/flexbox/flexbox";
-  import FlexboxItem from "vux/src/components/flexbox/flexbox-item";
+  import {Flexbox, FlexboxItem} from "vux";
   
   export default {
     name: "ProjectFragment",
@@ -59,6 +58,13 @@
         let list = [];
         if (!(JSON.stringify(this.projectObject) === "{}")) {
           list = this.projectObject.data.datas;
+        }
+        if (list.length > 0) {
+          list.map(function (value, index, array) {
+            let desc = value.desc;
+            value.simpleDesc = desc.slice(0, 60) + "...";
+            return value;
+          })
         }
         return list;
       }

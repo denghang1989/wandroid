@@ -1,13 +1,16 @@
 <template>
   <div class="project">
-    <tab v-model="currentIndex">
-      <tab-item v-for="(item, index) in getTabList" :key="index" :selected="index===currentIndex"
-                @on-item-click="onItemClick">
-        {{item.name}}
-      </tab-item>
-    </tab>
-    
-    <router-view :cid="cid"/>
+    <header class="project-header">
+      <tab v-model="currentIndex">
+        <tab-item v-for="(item, index) in getTabList" :key="index" :selected="index===currentIndex"
+                  @on-item-click="onItemClick">
+          {{item.name}}
+        </tab-item>
+      </tab>
+    </header>
+    <main class="project-main">
+      <router-view :cid="cid"/>
+    </main>
   </div>
 </template>
 
@@ -55,5 +58,16 @@
 </script>
 
 <style scoped>
+  .project-header {
+    width: 100%;
+    height: 44px;
+    position: fixed;
+    top: 46px;
+    z-index: 100;
+  }
+  
+  .project-main {
+    margin-top: 44px;
+  }
 
 </style>

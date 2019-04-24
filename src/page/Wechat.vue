@@ -1,12 +1,16 @@
 <template>
   <div class="wechat">
-    <tab v-model="currentIndex">
-      <tab-item v-for="(item, index) in getTabList" :key="index" :selected="index===currentIndex"
-                @on-item-click="onItemClick">
-        {{item.name}}
-      </tab-item>
-    </tab>
-    <router-view :chapterId="chapterId"/>
+    <header class="wechat-header">
+      <tab v-model="currentIndex">
+        <tab-item v-for="(item, index) in getTabList" :key="index" :selected="index===currentIndex"
+                  @on-item-click="onItemClick">
+          {{item.name}}
+        </tab-item>
+      </tab>
+    </header>
+    <main class="wechat-main">
+      <router-view :chapterId="chapterId"/>
+    </main>
   </div>
 </template>
 
@@ -53,5 +57,15 @@
 </script>
 
 <style scoped>
-
+  .wechat-header {
+    width: 100%;
+    height: 44px;
+    position: fixed;
+    top: 46px;
+    z-index: 100;
+  }
+  
+  .wechat-main {
+    margin-top: 44px;
+  }
 </style>
