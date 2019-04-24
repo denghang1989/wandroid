@@ -30,7 +30,13 @@ export default new Router({
     {
       path: '/project',
       name: 'Project',
-      component: Project
+      component: Project,
+      children: [
+        {
+          path: "",
+          component: ProjectFragment
+        }
+      ]
     },
     {
       path: '/wechat',
@@ -46,12 +52,6 @@ export default new Router({
     {
       path: '/system',
       name: 'System',
-      component: System,
-      children: [
-        {
-          path: "",
-          component: ProjectFragment
-        }
-      ]
+      component: System
     }]
 })
