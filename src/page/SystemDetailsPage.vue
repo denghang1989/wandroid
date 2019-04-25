@@ -34,6 +34,7 @@
       onItemClick(index) {
         let tabData = this.getTabList[index];
         this.chapterId = tabData.id;
+        console.log(this.chapterId);
       }
     },
   }
