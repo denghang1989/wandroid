@@ -7,7 +7,8 @@ import Wechat from '@/page/Wechat';
 import System from '@/page/System';
 import WechatFragment from '@/page/WechatFragment';
 import ProjectFragment from '@/page/ProjectFragment';
-import SystemDetailsPage from '@/page/SystemDetailsPage.vue';
+import SystemDetailsPage from '@/page/SystemDetailsPage';
+import SystemDetailItemPage from '@/page/SystemDetailItemPage';
 
 Vue.use(Router);
 
@@ -58,7 +59,13 @@ export default new Router({
     {
       path: '/systemDetailsPage',
       name: 'SystemDetailsPage',
-      component: SystemDetailsPage
+      component: SystemDetailsPage,
+      children:[
+        {
+          path:"",
+          component:SystemDetailItemPage
+        }
+      ]
     }
     
     ]
