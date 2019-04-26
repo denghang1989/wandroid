@@ -2,29 +2,17 @@
   <div class="fragment">
     <ul class="list-ui">
       <li class="list-item" v-for="(item,index) in getlist" :key="index">
-        <section class="item">
-          <header class="item-header">
-            <span>{{item.author}}</span>
-            <span>{{item.niceDate}}</span>
-          </header>
-          <main class="item-main">
-            {{item.title}}
-          </main>
-          <footer class="item-footer">
-            <span>{{item.superChapterName}}/{{item.chapterName}}</span>
-            <span>
-              <i class="fa fa-heart-o" aria-hidden="true"></i>
-            </span>
-          </footer>
-        </section>
+        <BlogItem :item="item"></BlogItem>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+  import BlogItem from "../components/BlogItem";
   export default {
     name: "WechatFragment",
+    components: {BlogItem},
     data() {
       return {
         dataObject: {},

@@ -3,21 +3,7 @@
     <swiper :list="imageList" @on-index-change="onIndexChange"></swiper>
     <ul class="list-ui">
       <li class="list-item" v-for="(item,index) in articleList" :key="index">
-        <section class="item">
-          <header class="item-header">
-            <span>{{item.author}}</span>
-            <span>{{item.niceDate}}</span>
-          </header>
-          <main class="item-main">
-            {{item.title}}
-          </main>
-          <footer class="item-footer">
-            <span>{{item.superChapterName}}/{{item.chapterName}}</span>
-            <span>
-              <i class="fa fa-heart-o" aria-hidden="true"></i>
-            </span>
-          </footer>
-        </section>
+        <BlogItem :item="item"></BlogItem>
       </li>
     </ul>
   </div>
@@ -25,10 +11,11 @@
 
 <script>
   import {Swiper} from "vux";
+  import BlogItem from "../components/BlogItem";
   
   export default {
     name: "Home",
-    components: {Swiper},
+    components: {BlogItem, Swiper},
     data() {
       return {
         imageList: [],

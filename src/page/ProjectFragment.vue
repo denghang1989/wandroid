@@ -62,7 +62,7 @@
         if (list.length > 0) {
           list.map(function (value, index, array) {
             let desc = value.desc;
-            value.simpleDesc = desc.slice(0, 60) + "...";
+            value.simpleDesc = desc.slice(0, 30) + "...";
             return value;
           })
         }
