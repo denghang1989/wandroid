@@ -1,13 +1,13 @@
 <template>
   <div class="SystemDetailsPage">
-    <header>
+    <header class="system-header">
       <tab>
         <tab-item v-for="(item,index) in getTabList" :key="index" :selected="index===0" @on-item-click="onItemClick">
           {{item.name}}
         </tab-item>
       </tab>
     </header>
-    <main>
+    <main class="system-main">
       <router-view :chapterId="chapterId"></router-view>
     </main>
   </div>
@@ -34,12 +34,21 @@
       onItemClick(index) {
         let tabData = this.getTabList[index];
         this.chapterId = tabData.id;
-        console.log(this.chapterId);
       }
     },
   }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  .system-header {
+    position: fixed;
+    top: 44px;
+    z-index: 1000;
+    width: 100%;
+    height: 44px;
+  }
+  
+  .system-main {
+    padding-top: 44px;
+  }
 </style>

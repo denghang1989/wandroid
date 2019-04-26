@@ -9,6 +9,7 @@ import WechatFragment from '@/page/WechatFragment';
 import ProjectFragment from '@/page/ProjectFragment';
 import SystemDetailsPage from '@/page/SystemDetailsPage';
 import SystemDetailItemPage from '@/page/SystemDetailItemPage';
+import Blog from '@/page/Blog';
 
 Vue.use(Router);
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/blog',
+      name: 'Blog',
+      component: Blog
     },
     {
       path: '/person',
@@ -60,13 +66,13 @@ export default new Router({
       path: '/systemDetailsPage',
       name: 'SystemDetailsPage',
       component: SystemDetailsPage,
-      children:[
+      children: [
         {
-          path:"",
-          component:SystemDetailItemPage
+          path: "",
+          component: SystemDetailItemPage
         }
       ]
     }
-    
-    ]
+  
+  ]
 })

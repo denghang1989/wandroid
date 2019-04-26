@@ -1,7 +1,7 @@
 <template>
   <div class="SystemDetailItemPage">
     <ul class="list-ui">
-      <li class="list-item" v-for="(item,index) in articleList" :key="index">
+      <li class="list-item" v-for="(item,index) in articleList" :key="index" v-on:click="handleItemClick(item,index)">
         <section class="item">
           <header class="item-header">
             <span>{{item.author}}</span>
@@ -34,27 +34,44 @@
     
     data() {
       return {
-        data: {}
+        projectObject: {}
       }
     },
     
     computed: {
       articleList() {
-        return this.data;
+        let list = [];
+        if (!(JSON.stringify(this.projectObject) === "{}")) {
+          list = this.projectObject.data.datas;
+        }
+        if (list.length > 0) {
+          list.map(function (value, index, array) {
+            let desc = value.desc;
+            value.simpleDesc = desc.slice(0, 60) + "...";
+            return value;
+          })
+        }
+        return list;
       }
     },
     
     watch: {
       chapterId(newValue, oldValue) {
-        console.log(newValue);
+        this.getData(newValue);
       }
     },
     
     methods: {
       getData(chapterId) {
-        this.$http.get("/api/").then(({data}) => {
-        
+        this.$http.get(`/api/article/list/0/json?cid=${chapterId}`).then(({data}) => {
+          if (data.errorCode === 0) {
+            this.projectObject = data;
+          }
         })
+      },
+      
+      handleItemClick(item, index) {
+        this.$router.push({path: "/blog", query: {blogLink: item.link}})
       }
     },
     mounted() {
@@ -64,5 +81,39 @@
 </script>
 
 <style scoped>
-
+  .list-ui {
+    margin: 0;
+    list-style: none;
+  }
+  
+  .list-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .item-header, .item-footer {
+    display: flex;
+    flex-direction: row;
+    padding: 3px 0px;
+    justify-content: space-between;
+  }
+  
+  .item-header > span, .item-footer > span {
+    color: #333333;
+    font-size: 12px;
+  }
+  
+  .item-main {
+    font-size: 16px;
+    padding: 3px 0px;
+    margin: 0;
+  }
+  
+  .list-item:last-child {
+    border-bottom: none;
+  }
+  
+  span > i {
+    font-size: 18px;
+  }
 </style>
